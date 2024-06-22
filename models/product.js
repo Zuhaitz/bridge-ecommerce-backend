@@ -1,24 +1,26 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Category extends Model {
+  class Product extends Model {
     static associate(models) {
-      Category.hasMany(models.Product);
+      Product.belongsTo(models.Category, { foreignKey: "categoryId" });
     }
   }
-  Category.init(
+  Product.init(
     {
       name: DataTypes.STRING(50),
       description: DataTypes.STRING(300),
+      price: DataTypes.FLOAT,
+      categoryId: DataTypes.INTEGER,
     },
     {
       sequelize,
-      modelName: "Category",
+      modelName: "Product",
       // para no generar los UpdateAt y CreatedAt que hay por defecto
       timestamps: false,
       //mantener singular
       freezeTableName: true,
     },
   );
-  return Category;
+  return Product;
 };
