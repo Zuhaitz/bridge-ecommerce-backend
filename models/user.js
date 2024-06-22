@@ -10,14 +10,20 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      name: DataTypes.STRING(50),
+      // Para que reconozca que name es la clave, y no el id
+      name: {
+        type: DataTypes.STRING(50),
+        primaryKey: true,
+      },
       email: DataTypes.STRING(50),
-      password: DataTypes.STRING(50),
+      password: DataTypes.STRING,
       role: DataTypes.STRING(50),
     },
     {
       sequelize,
       modelName: "User",
+      freezeTableName: true,
+      timestamps: false,
     },
   );
   return User;
