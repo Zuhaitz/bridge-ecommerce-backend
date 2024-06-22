@@ -1,5 +1,7 @@
 const { User } = require("../models/index");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { jwt_secret } = require("../config/config.js")["development"];
 
 // Ref: https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
 const regexEmail = /^\S+@\S+\.\S+$/;
@@ -23,6 +25,26 @@ const UserController = {
         console.error(err);
         res.status(400).send({ error: err.original.code });
       });
+  },
+  login(req, res) {
+    User.findOne({
+      where: { name: req.body.name },
+    }).then((user) => {
+      if (!user)
+        return res
+          .status(400)
+          .send({ message: "User or password is incorrect" });
+
+      const isEqual = bcrypt.compareSync(req.body.password, user.password);
+
+      if (!isEqual)
+        return res
+          .status(400)
+          .send({ message: "User or password is incorrect" });
+
+      const token = jwt.sign({ name: user.name }, jwt_secret);
+      res.send({ message: "Bienvenid@ " + user.name, user, token });
+    });
   },
 };
 
