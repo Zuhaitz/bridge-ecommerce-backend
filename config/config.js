@@ -7,6 +7,7 @@ module.exports = {
     database: "ecommerce_db",
     host: "127.0.0.1",
     dialect: "mysql",
+    jwt_secret: process.env.JWT_SECRET,
   },
   test: {
     username: "root",
