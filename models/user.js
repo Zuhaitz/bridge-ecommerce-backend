@@ -14,8 +14,26 @@ module.exports = (sequelize, DataTypes) => {
       name: {
         type: DataTypes.STRING(50),
         primaryKey: true,
+        allowNull: false,
+
+        validate: {
+          len: {
+            args: [2, 20],
+            msg: "Username has to be between 2 and 20 characters long",
+          },
+          notEmpty: { msg: "Please fill the username value" },
+          notNull: { msg: "Please fill the username value" },
+        },
       },
-      email: DataTypes.STRING(50),
+      email: {
+        type: DataTypes.STRING(50),
+        allowNull: false,
+
+        validate: {
+          notNull: { msg: "Por favor introduce tu correo" },
+          isEmail: { msg: "Por favor introduce un correo valido" },
+        },
+      },
       password: DataTypes.STRING,
       role: DataTypes.STRING(50),
     },
