@@ -1,4 +1,5 @@
-const { User, Token } = require("../models/index");
+const { User, Token, Sequelize } = require("../models/index");
+const { Op } = Sequelize;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { jwt_secret } = require("../config/config.js")["development"];
@@ -42,6 +43,23 @@ const UserController = {
       Token.create({ token, username: user.name });
       res.send({ message: "Bienvenid@ " + user.name, user, token });
     });
+  },
+
+  async logout(req, res) {
+    try {
+      await Token.destroy({
+        where: {
+          [Op.and]: [
+            { username: req.user.name },
+            { token: req.headers.authorization },
+          ],
+        },
+      });
+      res.send({ message: "Logout successfully" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: "Problem found when trying to logout" });
+    }
   },
 };
 

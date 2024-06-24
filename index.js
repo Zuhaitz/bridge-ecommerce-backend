@@ -5,6 +5,7 @@ const PORT = 3000;
 
 app.use(express.json());
 app.use("/users", require("./routes/users"));
+app.use("/users", require("./routes/users"));
 
 app.use(typeError);
 
