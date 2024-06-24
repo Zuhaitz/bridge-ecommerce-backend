@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
             args: [2, 20],
             msg: "Username has to be between 2 and 20 characters long",
           },
-          notEmpty: { msg: "Please fill the username value" },
-          notNull: { msg: "Please fill the username value" },
+          notEmpty: { msg: "Please introduce the username" },
+          notNull: { msg: "Please introduce the username" },
         },
       },
       email: {
@@ -30,8 +30,8 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
 
         validate: {
-          notNull: { msg: "Por favor introduce tu correo" },
-          isEmail: { msg: "Por favor introduce un correo valido" },
+          notNull: { msg: "Please introduce the email" },
+          isEmail: { msg: "Please introduce a valid email" },
         },
       },
       password: DataTypes.STRING,
