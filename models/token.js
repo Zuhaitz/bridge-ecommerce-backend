@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Token",
+      freezeTableName: true,
     },
   );
   return Token;
