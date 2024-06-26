@@ -11,7 +11,19 @@ const OrderController = {
       res.send(order);
     } catch (error) {
       console.log(error);
+      res.status(400).send(error);
     }
+  },
+
+  getAll(req, res) {
+    const user = req.user.name;
+
+    Order.findAll({ where: { user } })
+      .then((orders) => res.send(orders))
+      .catch((error) => {
+        console.log(error);
+        res.status(400).send(error);
+      });
   },
 };
 
