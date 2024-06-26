@@ -1,4 +1,4 @@
-const { User, Token, Sequelize } = require("../models/index");
+const { User, Order, Token, Sequelize } = require("../models/index");
 const { Op } = Sequelize;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -59,6 +59,23 @@ const UserController = {
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Problem found when trying to logout" });
+    }
+  },
+
+  async getInfo(req, res) {
+    try {
+      const user = await User.findByPk(req.user.name, {
+        attributes: ["name", "email"],
+      });
+      const orders = await Order.findAll({
+        attributes: ["id", "createdAt"],
+        where: { user: user.name },
+      });
+
+      res.send({ user, orders });
+    } catch (error) {
+      console.error(error);
+      res.status(400).send(error);
     }
   },
 };

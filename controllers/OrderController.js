@@ -16,9 +16,7 @@ const OrderController = {
   },
 
   getAll(req, res) {
-    const user = req.user.name;
-
-    Order.findAll({ where: { user } })
+    Order.findAll()
       .then((orders) => res.send(orders))
       .catch((error) => {
         console.log(error);
