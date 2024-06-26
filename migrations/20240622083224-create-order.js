@@ -15,6 +15,14 @@ module.exports = {
         type: Sequelize.STRING(50),
         references: { model: "User", key: "name" },
       },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
