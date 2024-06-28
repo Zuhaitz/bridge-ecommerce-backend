@@ -1,4 +1,11 @@
-const { User, Order, Token, Sequelize } = require("../models/index");
+const {
+  User,
+  Order,
+  Product,
+  Category,
+  Token,
+  Sequelize,
+} = require("../models/index");
 const { Op } = Sequelize;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -70,6 +77,17 @@ const UserController = {
       const orders = await Order.findAll({
         attributes: ["id", "createdAt"],
         where: { user: user.name },
+
+        include: {
+          model: Product,
+          attributes: ["name", "description"],
+          through: { attributes: [] },
+
+          include: {
+            model: Category,
+            attributes: ["name", "description"],
+          },
+        },
       });
 
       res.send({ user, orders });

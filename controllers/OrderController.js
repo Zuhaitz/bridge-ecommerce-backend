@@ -1,4 +1,4 @@
-const { Order } = require("../models");
+const { Order, Product, Category, OrderProduct } = require("../models");
 
 const OrderController = {
   async create(req, res) {
@@ -6,7 +6,12 @@ const OrderController = {
       const user = req.user.name;
       const products = req.body.products;
       const order = await Order.create({ user });
-      console.log(products);
+      for (x in products) {
+        await OrderProduct.create({
+          orderId: order.id,
+          productId: products[x],
+        });
+      }
 
       res.send(order);
     } catch (error) {
@@ -16,7 +21,18 @@ const OrderController = {
   },
 
   getAll(req, res) {
-    Order.findAll()
+    Order.findAll({
+      include: {
+        model: Product,
+        attributes: ["name", "description"],
+        through: { attributes: [] },
+
+        include: {
+          model: Category,
+          attributes: ["name", "description"],
+        },
+      },
+    })
       .then((orders) => res.send(orders))
       .catch((error) => {
         console.log(error);
