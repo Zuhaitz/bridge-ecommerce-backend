@@ -1,4 +1,4 @@
-const { Category, Sequelize } = require("../models/index.js");
+const { Category, Product, Sequelize } = require("../models/index.js");
 const { Op } = Sequelize;
 
 const CategoryController = {
@@ -14,7 +14,7 @@ const CategoryController = {
     Category.findAll()
       .then((category) =>
         res
-          .status(201)
+          .status(200)
           .send({ message: "These are all the categories", category }),
       )
       .catch((err) => console.error(err));
@@ -61,6 +61,17 @@ const CategoryController = {
         },
       },
     }).then((category) => res.send(category));
+  },
+
+  getAllWithProduct(req, res) {
+    Category.findAll({ include: Product })
+      .then((category) =>
+        res.status(200).send({
+          message: "These are all the categories with products",
+          category,
+        }),
+      )
+      .catch((err) => console.error(err));
   },
 };
 
