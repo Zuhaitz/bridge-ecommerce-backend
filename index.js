@@ -6,6 +6,7 @@ const PORT = 3000;
 app.use(express.json());
 app.use("/users", require("./routes/users"));
 app.use("/category", require("./routes/category"));
+app.use("/products", require("./routes/products"));
 
 app.use(typeError);
 
