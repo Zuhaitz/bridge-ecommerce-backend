@@ -19,9 +19,7 @@ To run this project, you will need to add the following environment variables to
 
 #### Add Order
 
-```http
-  POST /orders
-```
+> POST /orders
 
 | Parameter  | Type    | Description                                    |
 | :--------- | :------ | :--------------------------------------------- |
