@@ -9,5 +9,6 @@ router.put("/id/:id", ProductController.update);
 router.get("/id/:id", ProductController.getById);
 router.get("/name/:name", ProductController.getByName);
 router.get("/price/:price", ProductController.getByPrice);
+router.get("/order", ProductController.getAllOrderByPrice);
 
 module.exports = router;

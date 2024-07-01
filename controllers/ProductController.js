@@ -14,7 +14,7 @@ const ProductController = {
     Product.findAll()
       .then((product) =>
         res
-          .status(201)
+          .status(200)
           .send({ message: "These are all the products", product }),
       )
       .catch((err) => console.error(err));
@@ -71,6 +71,16 @@ const ProductController = {
         },
       },
     }).then((product) => res.send(product));
+  },
+
+  getAllOrderByPrice(req, res) {
+    Product.findAll({ order: [["price", "DESC"]] })
+      .then((product) =>
+        res
+          .status(200)
+          .send({ message: "These are all the products", product }),
+      )
+      .catch((err) => console.error(err));
   },
 };
 
