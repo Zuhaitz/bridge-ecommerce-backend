@@ -4,6 +4,11 @@ module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     static associate(models) {
       Product.belongsTo(models.Category, { foreignKey: "categoryId" });
+
+      Product.belongsToMany(models.Order, {
+        through: models.OrderProduct,
+        foreignKey: "productId",
+      });
     }
   }
   Product.init(
