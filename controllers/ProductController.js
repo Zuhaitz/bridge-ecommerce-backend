@@ -37,6 +37,7 @@ const ProductController = {
       res.send({ message: "The product has been removed" });
     } catch (error) {
       console.log(error);
+      res.status(500).send({ message: "Problem deleting product", error });
     }
   },
 
