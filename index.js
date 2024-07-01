@@ -8,6 +8,6 @@ app.use("/users", require("./routes/users"));
 app.use("/category", require("./routes/category"));
 app.use("/products", require("./routes/products"));
 
-app.use(typeError);
+// app.use(typeError);
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}...`));

@@ -1,4 +1,5 @@
-const { Product } = require("../models/index.js");
+const { Product, Sequelize } = require("../models/index.js");
+const { Op } = Sequelize;
 
 const ProductController = {
   create(req, res) {
@@ -52,8 +53,8 @@ const ProductController = {
     }
   },
 
-  getOneByName(req, res) {
-    Product.findOne({
+  getByName(req, res) {
+    Product.findAll({
       where: {
         name: {
           [Op.like]: `%${req.params.name}%`,
@@ -62,11 +63,11 @@ const ProductController = {
     }).then((product) => res.send(product));
   },
 
-  getOneByName(req, res) {
-    Product.findOne({
+  getByPrice(req, res) {
+    Product.findAll({
       where: {
-        name: {
-          [Op.like]: `%${req.params.price}%`,
+        price: {
+          [Op.like]: req.params.price,
         },
       },
     }).then((product) => res.send(product));
