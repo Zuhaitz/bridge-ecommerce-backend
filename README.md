@@ -1,6 +1,6 @@
 # E-Commerce Backend Implementation
 
-Backend
+Backend project for an e-commerce type platform, making use of tools like Sequelize and Node.
 
 ## Authors
 
