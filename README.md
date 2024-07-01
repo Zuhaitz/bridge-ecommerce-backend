@@ -4,7 +4,7 @@ Backend project for an e-commerce type platform, making use of tools like Sequel
 
 ## Authors
 
-- [Carlota](https://github.com/CarBlank)
+- [Carlota Ruiz](https://github.com/CarBlank)
 - [Zuhaitz Martínez](https://github.com/Zuhaitz)
 
 ## Environment Variables
@@ -14,6 +14,20 @@ To run this project, you will need to add the following environment variables to
 `DB_PASSWORD` - password of the user to access the database
 
 `JWT_SECRET` - for jsonwebtoken
+
+## API Reference
+
+#### Add Order
+
+```http
+  POST /orders
+```
+
+| Parameter  | Type    | Description                                    |
+| :--------- | :------ | :--------------------------------------------- |
+| `products` | `array` | **Required**. List of ids of products in order |
+
+** Needs Auth token of user **
 
 ## Run Locally
 
