@@ -80,7 +80,7 @@ const UserController = {
 
         include: {
           model: Product,
-          attributes: ["name", "description"],
+          attributes: ["id", "name", "description", "price"],
           through: { attributes: [] },
 
           include: {
