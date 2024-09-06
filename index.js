@@ -17,13 +17,6 @@ app.use("/categories", require("./routes/categories"));
 app.use("/orders", require("./routes/orders"));
 app.use("/products", require("./routes/products"));
 
-const upload = require("./config/cloudinary");
-app.post("/upload", upload.single("picture"), (req, res) => {
-  res.status(200).json({
-    url: req.file,
-  });
-});
-
 app.use(typeError);
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}...`));

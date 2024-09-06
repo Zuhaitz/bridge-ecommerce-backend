@@ -30,6 +30,21 @@ const UserController = {
     }
   },
 
+  async uploadImage(req, res) {
+    try {
+      // console.log(req.user.dataValues.name);
+      await User.update(
+        { picture: req.file.path },
+        { where: { name: req.user.dataValues.name } },
+      );
+
+      res.send({ path: req.file.path });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ message: "Problem uploading image" });
+    }
+  },
+
   login(req, res) {
     User.findOne({
       where: { name: req.body.name },
@@ -72,7 +87,7 @@ const UserController = {
   async getInfo(req, res) {
     try {
       const user = await User.findByPk(req.user.name, {
-        attributes: ["name", "email"],
+        attributes: ["name", "email", "picture"],
       });
       const orders = await Order.findAll({
         attributes: ["id", "createdAt"],

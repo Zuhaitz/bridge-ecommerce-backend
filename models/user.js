@@ -35,6 +35,7 @@ module.exports = (sequelize, DataTypes) => {
           isEmail: { msg: "Please introduce a valid email" },
         },
       },
+      picture: DataTypes.STRING,
       password: DataTypes.STRING,
       role: DataTypes.STRING(50),
     },
