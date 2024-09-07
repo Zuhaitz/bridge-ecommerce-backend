@@ -15,6 +15,16 @@ To run this project, you will need to add the following environment variables to
 
 `JWT_SECRET` - for jsonwebtoken
 
+`PORT` (optional)
+
+`CLOUDINARY_NAME`
+`CLOUDINARY_KEY`
+`CLOUDINARY_KEY_SECRET`
+
+## Acknowledgements
+
+- [Cloudinary](https://cloudinary.com)
+
 ## API Reference
 
 #### Add Order
