@@ -87,7 +87,7 @@ const UserController = {
   async getInfo(req, res) {
     try {
       const user = await User.findByPk(req.user.name, {
-        attributes: ["name", "email", "picture"],
+        attributes: ["name", "email", "picture", "role"],
       });
       const orders = await Order.findAll({
         attributes: ["id", "createdAt"],
